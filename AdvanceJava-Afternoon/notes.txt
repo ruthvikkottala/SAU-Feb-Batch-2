@@ -1,0 +1,9 @@
+					AU Adv Java asignment
+	
+		Merging code is present in Code.java file.
+		Merging result is present in result.xml.
+
+		Validating Licenses is present in Task2.java file.
+		Validation results are present in valid.xml and invalid.xml.
+
+	-Ruthvik Kottala
