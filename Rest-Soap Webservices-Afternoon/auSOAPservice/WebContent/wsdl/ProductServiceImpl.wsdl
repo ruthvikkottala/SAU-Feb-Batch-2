@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.app.au.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.app.au.com" xmlns:intf="http://services.app.au.com" xmlns:tns1="http://app.au.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.app.au.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://app.au.com"/>
+   <element name="getProduct">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductReturn" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllProducts">
+    <complexType/>
+   </element>
+   <element name="getAllProductsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllProductsReturn" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteProduct">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteProductResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteProductReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addProduct">
+    <complexType>
+     <sequence>
+      <element name="p" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addProductResponse">
+    <complexType>
+     <sequence>
+      <element name="addProductReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://app.au.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Product">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="price" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getProductResponse">
+
+      <wsdl:part element="impl:getProductResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteProductResponse">
+
+      <wsdl:part element="impl:deleteProductResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addProductRequest">
+
+      <wsdl:part element="impl:addProduct" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductRequest">
+
+      <wsdl:part element="impl:getProduct" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addProductResponse">
+
+      <wsdl:part element="impl:addProductResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllProductsRequest">
+
+      <wsdl:part element="impl:getAllProducts" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllProductsResponse">
+
+      <wsdl:part element="impl:getAllProductsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteProductRequest">
+
+      <wsdl:part element="impl:deleteProduct" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ProductServiceImpl">
+
+      <wsdl:operation name="getProduct">
+
+         <wsdl:input message="impl:getProductRequest" name="getProductRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProductResponse" name="getProductResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllProducts">
+
+         <wsdl:input message="impl:getAllProductsRequest" name="getAllProductsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllProductsResponse" name="getAllProductsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteProduct">
+
+         <wsdl:input message="impl:deleteProductRequest" name="deleteProductRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteProductResponse" name="deleteProductResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addProduct">
+
+         <wsdl:input message="impl:addProductRequest" name="addProductRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addProductResponse" name="addProductResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ProductServiceImplSoapBinding" type="impl:ProductServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getProduct">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProductRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProductResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllProducts">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllProductsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllProductsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteProduct">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteProductRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteProductResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addProduct">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addProductRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addProductResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ProductServiceImplService">
+
+      <wsdl:port binding="impl:ProductServiceImplSoapBinding" name="ProductServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/auSOAPservice/services/ProductServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

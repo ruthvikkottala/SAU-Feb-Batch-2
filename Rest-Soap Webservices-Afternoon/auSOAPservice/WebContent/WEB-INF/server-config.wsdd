@@ -1,0 +1,73 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\user\Desktop\ruthvick\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\auSOAPservice\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="ProductServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+  <ns3:operation name="getProduct" qname="ns1:getProduct" returnQName="ns1:getProductReturn" returnType="ns2:Product" soapAction="" xmlns:ns1="http://services.app.au.com" xmlns:ns2="http://app.au.com" xmlns:ns3="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns3:operation>
+  <ns1:operation name="getAllProducts" qname="ns3:getAllProducts" returnQName="ns3:getAllProductsReturn" returnType="ns4:Product" soapAction="" xmlns:ns3="http://services.app.au.com" xmlns:ns4="http://app.au.com"/>
+  <ns1:operation name="deleteProduct" qname="ns5:deleteProduct" returnQName="ns5:deleteProductReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://services.app.au.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:id" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="addProduct" qname="ns6:addProduct" returnQName="ns6:addProductReturn" returnType="xsd:boolean" soapAction="" xmlns:ns6="http://services.app.au.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:p" type="ns7:Product" xmlns:ns7="http://app.au.com"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAllProducts getProduct addProduct deleteProduct"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="ProductServiceImpl"/>
+  <ns1:parameter name="className" value="com.au.app.services.ProductServiceImpl"/>
+  <ns1:parameter name="wsdlServicePort" value="ProductServiceImpl"/>
+  <ns1:parameter name="schemaQualified" value="http://services.app.au.com,http://app.au.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.app.au.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="ProductServiceImplService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns8:Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.au.app.Product" xmlns:ns8="http://app.au.com"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

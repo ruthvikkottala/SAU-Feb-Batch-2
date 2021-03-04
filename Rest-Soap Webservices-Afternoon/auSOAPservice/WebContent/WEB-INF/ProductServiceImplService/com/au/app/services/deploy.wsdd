@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ProductServiceImplService WSDL service -->
+
+  <service name="ProductServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.app.au.com"/>
+      <parameter name="wsdlServiceElement" value="ProductServiceImplService"/>
+      <parameter name="schemaQualified" value="http://services.app.au.com,http://app.au.com"/>
+      <parameter name="wsdlServicePort" value="ProductServiceImpl"/>
+      <parameter name="className" value="com.au.app.services.ProductServiceImpl"/>
+      <parameter name="wsdlPortType" value="ProductServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://services.app.au.com" xmlns:retNS="http://services.app.au.com" xmlns:rtns="http://app.au.com" name="getProduct" qname="operNS:getProduct" returnQName="retNS:getProductReturn" returnType="rtns:Product" soapAction="">
+        <parameter xmlns:pns="http://services.app.au.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://services.app.au.com" xmlns:retNS="http://services.app.au.com" xmlns:rtns="http://app.au.com" name="getAllProducts" qname="operNS:getAllProducts" returnQName="retNS:getAllProductsReturn" returnType="rtns:Product" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://services.app.au.com" xmlns:retNS="http://services.app.au.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteProduct" qname="operNS:deleteProduct" returnQName="retNS:deleteProductReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.app.au.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://services.app.au.com" xmlns:retNS="http://services.app.au.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addProduct" qname="operNS:addProduct" returnQName="retNS:addProductReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.app.au.com" xmlns:tns="http://app.au.com" qname="pns:p" type="tns:Product"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllProducts getProduct addProduct deleteProduct"/>
+
+      <typeMapping xmlns:ns="http://app.au.com" qname="ns:Product" type="java:com.au.app.Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
