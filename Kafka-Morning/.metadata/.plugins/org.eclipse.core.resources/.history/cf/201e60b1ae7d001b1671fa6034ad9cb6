@@ -1,0 +1,5 @@
+package com.rv.resource;
+
+public class UserResource {
+
+}
